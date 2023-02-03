@@ -18,11 +18,6 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     #ports:
       #- 9090:9090
-    links:
-      - cadvisor:cadvisor
-      - alertmanager:alertmanager
-    depends_on:
-      - cadvisor
   grafana:
     image: grafana/grafana
     user: '472'
@@ -39,13 +34,13 @@ services:
     depends_on:
       - prometheus
   
-  alertmanager:
-    image: prom/alertmanager
-    restart: always
-    ports:
-      - 9093:9093
-    volumes:
-      - ./alertmanager/:/etc/alertmanager/
-    command:
-      - '--config.file=/etc/alertmanager/config.yml'
-      - '--storage.path=/alertmanager'
+  # alertmanager:
+  #   image: prom/alertmanager
+  #   restart: always
+  #   ports:
+  #     - 9093:9093
+  #   volumes:
+  #     - ./alertmanager/:/etc/alertmanager/
+  #   command:
+  #     - '--config.file=/etc/alertmanager/config.yml'
+  #     - '--storage.path=/alertmanager'
